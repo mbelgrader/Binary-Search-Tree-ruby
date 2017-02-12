@@ -66,8 +66,16 @@ class BinarySearchTree
     node
   end
 
-  def self.find!(node, value)
+  def self.find!(node = @root, value)
+    return node if node.value == value
 
+    if value < node.value
+      return BinarySearchTree.find!(node.left, value)
+    else
+      return BinarySearchTree.find!(node.right, value)
+    end
+
+    nil
   end
 
   def self.preorder!(node)
