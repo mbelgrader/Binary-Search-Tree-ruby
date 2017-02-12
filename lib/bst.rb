@@ -1,3 +1,5 @@
+require 'byebug'
+
 class BSTNode
   attr_accessor :left, :right
   attr_reader :value
@@ -66,7 +68,8 @@ class BinarySearchTree
     node
   end
 
-  def self.find!(node = @root, value)
+  def self.find!(node, value)
+    return nil unless node
     return node if node.value == value
 
     if value < node.value
@@ -74,32 +77,53 @@ class BinarySearchTree
     else
       return BinarySearchTree.find!(node.right, value)
     end
-
-    nil
   end
 
   def self.preorder!(node)
+    return [node.value] unless node
 
+    result = [node.value]
+    result += BinarySearchTree.preorder!(node.left) if node.left
+    result += BinarySearchTree.preorder!(node.right) if node.right
+
+    result
   end
 
   def self.inorder!(node)
+    return [node.value] unless node
 
+    result = []
+    result += BinarySearchTree.preorder!(node.left) if node.left
+    result += [node.value]
+    result += BinarySearchTree.preorder!(node.right) if node.right
+
+    result
   end
 
   def self.postorder!(node)
+    return [node.value] unless node
 
+    result = []
+    result += BinarySearchTree.postorder!(node.left) if node.left
+    result += BinarySearchTree.postorder!(node.right) if node.right
+    result += [node.value]
   end
 
   def self.height!(node)
+    return -1 unless node
 
+    1 + [BinarySearchTree.height!(node.left),
+         BinarySearchTree.height!(node.right)].max
   end
 
   def self.max(node)
-
+    return node if node.right == nil
+    BinarySearchTree.max(node.right)
   end
 
   def self.min(node)
-
+    return node if node.left == nil
+    BinarySearchTree.min(node.left)
   end
 
   def self.delete_min!(node)
