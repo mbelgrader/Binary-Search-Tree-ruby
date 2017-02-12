@@ -55,7 +55,15 @@ class BinarySearchTree
   end
 
   def self.insert!(node, value)
+    return BSTNode.new(value) unless node
 
+    if value < node.value
+      node.left = BinarySearchTree.insert!(node.left, value)
+    else
+      node.right = BinarySearchTree.insert!(node.right, value)
+    end
+
+    node
   end
 
   def self.find!(node, value)
