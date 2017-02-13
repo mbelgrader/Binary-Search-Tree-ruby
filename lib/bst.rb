@@ -80,7 +80,7 @@ class BinarySearchTree
   end
 
   def self.preorder!(node)
-    return [node.value] unless node
+    return [] unless node
 
     result = [node.value]
     result += self.preorder!(node.left) if node.left
@@ -94,19 +94,19 @@ class BinarySearchTree
 
     result = []
     result += self.preorder!(node.left) if node.left
-    result += [node.value]
+    result << node.value
     result += self.preorder!(node.right) if node.right
 
     result
   end
 
   def self.postorder!(node)
-    return [node.value] unless node
+    return [] unless node
 
     result = []
     result += self.postorder!(node.left) if node.left
     result += self.postorder!(node.right) if node.right
-    result += [node.value]
+    result << node.value
   end
 
   def self.height!(node)
@@ -117,12 +117,12 @@ class BinarySearchTree
   end
 
   def self.max(node)
-    return node if node.right == nil
+    return node unless node.right
     self.max(node.right)
   end
 
   def self.min(node)
-    return node if node.left == nil
+    return node unless node.left
     self.min(node.left)
   end
 
