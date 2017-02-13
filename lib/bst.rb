@@ -142,8 +142,8 @@ class BinarySearchTree
     elsif value < node.value
       node.left = self.delete!(node.left, value)
     else
-      return node.right if node.left == nil
-      return node.left if node.right == nil
+      return node.right unless node.left
+      return node.left unless node.right
 
       target = node
       node = target.left.max
