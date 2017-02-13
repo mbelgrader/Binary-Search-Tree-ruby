@@ -59,10 +59,10 @@ class BinarySearchTree
   def self.insert!(node, value)
     return BSTNode.new(value) unless node
 
-    if value < node.value
-      node.left = self.insert!(node.left, value)
-    else
+    if value > node.value
       node.right = self.insert!(node.right, value)
+    else
+      node.left = self.insert!(node.left, value)
     end
 
     node
@@ -90,7 +90,7 @@ class BinarySearchTree
   end
 
   def self.inorder!(node)
-    return [node.value] unless node
+    return [] unless node
 
     result = []
     result += self.preorder!(node.left) if node.left
