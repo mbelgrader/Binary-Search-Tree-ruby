@@ -115,11 +115,11 @@ describe BinarySearchTree do
         BinarySearchTree.insert!(node, 1)
         expect(BinarySearchTree.height!(node)).to be 2
 
-        # BinarySearchTree.insert!(node, 9)
-        # expect(BinarySearchTree.height!(node)).to be 2
-        #
-        # BinarySearchTree.insert!(node, 0)
-        # expect(BinarySearchTree.height!(node)).to be 3
+        BinarySearchTree.insert!(node, 9)
+        expect(BinarySearchTree.height!(node)).to be 2
+
+        BinarySearchTree.insert!(node, 0)
+        expect(BinarySearchTree.height!(node)).to be 3
       end
     end
 
